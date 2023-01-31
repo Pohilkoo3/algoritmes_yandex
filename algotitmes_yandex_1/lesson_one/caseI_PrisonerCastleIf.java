@@ -27,18 +27,15 @@ public class caseI_PrisonerCastleIf
             int d = scanner.nextInt();
             int e = scanner.nextInt();
             String result = "";
-            List<Integer> window = new ArrayList<>();
-            window.add(a);
-            window.add(b);
-            window.add(c);
-            Collections.sort(window);
+            int[] stone = new int[]{a, b, c};
+            stone = sortedSizeStone(stone);
             if (d > e) {
                 int tmp = d;
                 d = e;
                 e = tmp;
             }
-            a = window.get(0);
-            b = window.get(1);
+            a = stone[0];
+            b = stone[1];
             if (d >= a && e >= b) {
                 result = "YES";
             } else {
@@ -46,4 +43,20 @@ public class caseI_PrisonerCastleIf
             }
             System.out.println(result);
         }
+
+    public static int[] sortedSizeStone(int[] stone) {
+        int count = 0;
+        do {
+            count = 0;
+            for (int i = 1; i < stone.length; i++) {
+                if (stone[i - 1] > stone[i]) {
+                    int tmp = stone[i - 1];
+                    stone[i - 1] = stone[i];
+                    stone[i] = tmp;
+                    count++;
+                }
+            }
+        } while (count > 0);
+        return stone;
+    }
 }
