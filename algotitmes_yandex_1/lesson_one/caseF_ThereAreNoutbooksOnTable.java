@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -13,7 +12,7 @@ import java.util.Scanner;
  **/
 public class Noutbooks {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int a = scanner.nextInt();
         int b = scanner.nextInt();
@@ -25,45 +24,40 @@ public class Noutbooks {
         int[] secondNote = getRightSize(c, d);
         c = secondNote[0];
         d = secondNote[1];
+        if (b < d) {
+            int[] newNote = getRightSize(b, d);
+            b = newNote[1];
+            d = newNote[0];
+            a = a + c;
+            c = a - c;
+            a = a - c;
+
+        }
         if (b == d) {
             if (c == a) {
-                addResult(a, b + d);
+                printResult(a, b + d);
                 return;
             }
-            addResult(b, a + c);
+            printResult(b, a + c);
             return;
         } else if (b > d) {
             if (a >= d) {
-                addResult(a, b + c);
+                printResult(a, b + c);
                 return;
             } else {
                 if ((b + c) * d <= (a + c) * b) {
-                    addResult(d, b + c);
+                    printResult(d, b + c);
                     return;
                 } else {
-                    addResult(b, a + c);
-                    return;
-                }
-            }
-        } else {
-            if (c >= b) {
-                addResult(c, d + a);
-                return;
-            } else {
-                if ((d + a) * b <= (a + c) * d) {
-                    addResult(b, d + a);
-                    return;
-                } else {
-                    addResult(d, a + c);
+                    printResult(b, a + c);
                     return;
                 }
             }
         }
-
-
     }
 
-    private static void addResult(int a, int b) {
+
+    private static void printResult(int a, int b) {
         System.out.printf("%d %d", a, b);
     }
 
